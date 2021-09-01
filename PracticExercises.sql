@@ -192,4 +192,55 @@
 --ORDER BY
 --	'NumOfSongs' DESC;
 
+--SELECT
+--	a.ArtistName, COUNT(DISTINCT Label) 'Labels'
+--FROM
+--	Artist a
+--JOIN
+--	Album al
+--ON
+--	a.Id = al.ArtistId
+--GROUP BY
+--	a.ArtistName
+--HAVING COUNT(DISTINCT Label) > 1;
 
+--SELECT
+--	al.Title, 
+--	al.AlbumLength 'Longest Runtime'
+--FROM
+--	Album al
+--WHERE
+--	al.AlbumLength = (
+--		SELECT 
+--			MAX(al.AlbumLength)
+--		FROM
+--			Album al);
+
+--SELECT
+--	s.Title, 
+--	s.SongLength 'Longest Runtime'
+--FROM
+--	Song s
+--WHERE
+--	s.SongLength = (
+--		SELECT 
+--			MAX(s.SongLength)
+--		FROM
+--			Song s);
+
+SELECT
+	s.Title, 
+	s.SongLength 'Longest Runtime',
+	al.Title 'Album'
+FROM
+	Song s
+JOIN
+	Album al
+ON
+	s.AlbumId = al.Id
+WHERE
+	s.SongLength = (
+		SELECT 
+			MAX(s.SongLength)
+		FROM
+			Song s);
